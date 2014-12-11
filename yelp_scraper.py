@@ -1,6 +1,5 @@
 #given a yelp web page url as a command line argument, this script extracts soem useful information from the Yelp web page
 #and stores it in a dictionary
-
 import re 
 from urllib import request
 import sys 
@@ -16,11 +15,11 @@ else:
 	bytecode = r.read()
 	htmlstr = bytecode.decode() #source code for the Yelp page
 	
-	restauraunt_name = re.search('itemprop="name">\s*([^<]+\w)\s*<', htmlstr) #the \w removes trailing whitespace
+	restauraunt_name = re.search('itemprop="name">\s*([^<]*)\\b\s*<', htmlstr) #the \\b removes trailing whitespace
 	restauraunt_name = restauraunt_name.group(1)
 	results['Name'] = restauraunt_name
 	
-	address = re.search('\<address\>\s*((\d+)([\w\s\.]+),([\w\s\.]+),\s(\w{2})\s(\d{5}))\s*<', htmlstr)
+	address = re.search('\<address\>\s*([^<]*)\\b\s*<', htmlstr) #have to use \\b for word boundary char in Python
 	full_address = address.group(1)
 	results['Address'] = full_address
 	
