@@ -10,7 +10,7 @@ if len(sys.argv) < 3:
 	
 else:
 	filename = sys.argv[1]
-	url = sys.argv[2]
+	url = "https://" + sys.argv[2] #full URL needs to have https:// at the start 
 	
 	r = request.urlopen(url) #first we obtain the source code for the web page
 	bytecode = r.read()
